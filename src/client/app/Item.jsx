@@ -2,10 +2,20 @@ import React from 'react';
 
 class Item extends React.Component {
 
-  addToSuitcase () {
-    console.log("adding item: ", this.props.index);
-    // var key = this.props.index;
-    // this.props.addToCapsule(key);
+  // addToSuitcase () {
+  //   // console.log("adding item: ", this.props.details.name);
+  // };
+
+  renderButton () {
+    if (this.props.showButton) {
+      return (
+        <button onClick={() => this.props.addToSuitcase(this.props.details)}>Add to Suitcase</button>
+      )
+    } else {
+      return (
+        <button onClick={() => this.props.removeFromSuitcase(this.props.details)}>Remove from Suitcase</button>
+      )
+    }
   };
 
   render () {
@@ -16,7 +26,7 @@ class Item extends React.Component {
         <img src={details.image} alt={details.name} />
         <h3>{details.name}</h3>
         <p>{details.type}</p>
-        <button onClick={() => this.loadCloset()}>Add to Suitcase</button>
+        {this.renderButton()}
       </li>
     )
   }

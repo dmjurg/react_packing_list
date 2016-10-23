@@ -59,21 +59,13 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 168);
 	
+	var _App = __webpack_require__(/*! ./App.jsx */ 234);
+	
+	var _App2 = _interopRequireDefault(_App);
+	
 	var _SuitcasePicker = __webpack_require__(/*! ./SuitcasePicker.jsx */ 229);
 	
 	var _SuitcasePicker2 = _interopRequireDefault(_SuitcasePicker);
-	
-	var _Suitcase = __webpack_require__(/*! ./Suitcase.jsx */ 230);
-	
-	var _Suitcase2 = _interopRequireDefault(_Suitcase);
-	
-	var _Closet = __webpack_require__(/*! ./Closet.jsx */ 231);
-	
-	var _Closet2 = _interopRequireDefault(_Closet);
-	
-	var _Item = __webpack_require__(/*! ./Item.jsx */ 232);
-	
-	var _Item2 = _interopRequireDefault(_Item);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -83,65 +75,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
-	
-	  function App() {
-	    _classCallCheck(this, App);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
-	
-	    _this.state = {
-	      suitcase: {},
-	      closet: {}
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(App, [{
-	    key: 'loadCloset',
-	    value: function loadCloset() {
-	      this.setState({
-	        closet: __webpack_require__(/*! ./sample-closet.jsx */ 233)
-	      });
-	    }
-	  }, {
-	    key: 'renderItem',
-	    value: function renderItem(key) {
-	      return _react2.default.createElement(_Item2.default, { key: key, index: key, details: this.state.closet[key] });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'My Suitcase'
-	        ),
-	        _react2.default.createElement(_Suitcase2.default, null),
-	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'My Closet'
-	        ),
-	        _react2.default.createElement(_Closet2.default, null),
-	        _react2.default.createElement(
-	          'ul',
-	          null,
-	          Object.keys(this.state.closet).map(this.renderItem)
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return App;
-	}(_react2.default.Component);
-	
-	var NotFound = function (_React$Component2) {
-	  _inherits(NotFound, _React$Component2);
+	var NotFound = function (_React$Component) {
+	  _inherits(NotFound, _React$Component);
 	
 	  function NotFound() {
 	    _classCallCheck(this, NotFound);
@@ -165,9 +100,9 @@
 	
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
-	  { history: _reactRouter.hashHistory },
+	  { history: _reactRouter.browserHistory },
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _SuitcasePicker2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/suitcase/:suitcaseId', component: App }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/suitcase/:suitcaseId', component: _App2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: '*', component: NotFound })
 	), document.getElementById('app'));
 
@@ -26641,7 +26576,7 @@
   \*******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -26652,6 +26587,8 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 168);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -26671,29 +26608,29 @@
 	  }
 	
 	  _createClass(SuitcasePicker, [{
-	    key: "goToSuitcase",
+	    key: 'goToSuitcase',
 	    value: function goToSuitcase(e) {
 	      e.preventDefault();
 	      var suitcaseId = this.refs.suitcaseId.value;
-	      // this.hashHistory.pushState(null, '/suitcase/' + suitcaseId);
+	      this.props.router.push('/suitcase/' + suitcaseId);
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 	
 	      return _react2.default.createElement(
-	        "form",
+	        'form',
 	        { onSubmit: function onSubmit(e) {
 	            return _this2.goToSuitcase(e);
 	          } },
 	        _react2.default.createElement(
-	          "h1",
+	          'h1',
 	          null,
-	          "What are you packing for?"
+	          'What are you packing for?'
 	        ),
-	        _react2.default.createElement("input", { type: "text", ref: "suitcaseId", required: true }),
-	        _react2.default.createElement("input", { type: "Submit" })
+	        _react2.default.createElement('input', { type: 'text', ref: 'suitcaseId', required: true }),
+	        _react2.default.createElement('input', { type: 'Submit' })
 	      );
 	    }
 	  }]);
@@ -26703,7 +26640,7 @@
 	
 	;
 	
-	exports.default = SuitcasePicker;
+	exports.default = (0, _reactRouter.withRouter)(SuitcasePicker);
 
 /***/ },
 /* 230 */
@@ -26724,6 +26661,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _Item = __webpack_require__(/*! ./Item.jsx */ 232);
+	
+	var _Item2 = _interopRequireDefault(_Item);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26742,15 +26683,12 @@
 	  }
 	
 	  _createClass(Suitcase, [{
+	    key: 'renderItem',
+	    value: function renderItem(item, i) {
+	      return _react2.default.createElement(_Item2.default, { key: 'item' + i, details: item, showButton: false, removeFromSuitcase: this.props.removeFromSuitcase });
+	    }
+	  }, {
 	    key: 'render',
-	
-	
-	    // loadCloset () {
-	    //   this.setState({
-	    //     closet : require('./sample-closet')
-	    //   })
-	    // };
-	
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
@@ -26759,6 +26697,11 @@
 	          'p',
 	          null,
 	          'Suitcase'
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.props.items.map(this.renderItem.bind(this))
 	        )
 	      );
 	    }
@@ -26788,6 +26731,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _Item = __webpack_require__(/*! ./Item.jsx */ 232);
+	
+	var _Item2 = _interopRequireDefault(_Item);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26795,6 +26742,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	;
 	
 	var Closet = function (_React$Component) {
 	  _inherits(Closet, _React$Component);
@@ -26806,19 +26755,21 @@
 	  }
 	
 	  _createClass(Closet, [{
+	    key: 'renderItem',
+	    value: function renderItem(item, i) {
+	      return _react2.default.createElement(_Item2.default, { key: 'item' + i, details: item, showButton: true, addToSuitcase: this.props.addToSuitcase });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        'closet',
 	        _react2.default.createElement(
-	          'button',
-	          { onClick: function onClick() {
-	              return _this2.loadCloset();
-	            } },
-	          'Load Closet'
+	          'ul',
+	          null,
+	          this.props.items.map(this.renderItem.bind(this))
 	        )
 	      );
 	    }
@@ -26836,7 +26787,7 @@
   \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -26866,40 +26817,54 @@
 	  }
 	
 	  _createClass(Item, [{
-	    key: "addToSuitcase",
-	    value: function addToSuitcase() {
-	      console.log("adding item: ", this.props.index);
-	      // var key = this.props.index;
-	      // this.props.addToCapsule(key);
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
+	    key: 'renderButton',
+	
+	
+	    // addToSuitcase () {
+	    //   // console.log("adding item: ", this.props.details.name);
+	    // };
+	
+	    value: function renderButton() {
 	      var _this2 = this;
 	
+	      if (this.props.showButton) {
+	        return _react2.default.createElement(
+	          'button',
+	          { onClick: function onClick() {
+	              return _this2.props.addToSuitcase(_this2.props.details);
+	            } },
+	          'Add to Suitcase'
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          'button',
+	          { onClick: function onClick() {
+	              return _this2.props.removeFromSuitcase(_this2.props.details);
+	            } },
+	          'Remove from Suitcase'
+	        );
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
 	      var details = this.props.details;
 	
 	      return _react2.default.createElement(
-	        "li",
+	        'li',
 	        null,
-	        _react2.default.createElement("img", { src: details.image, alt: details.name }),
+	        _react2.default.createElement('img', { src: details.image, alt: details.name }),
 	        _react2.default.createElement(
-	          "h3",
+	          'h3',
 	          null,
 	          details.name
 	        ),
 	        _react2.default.createElement(
-	          "p",
+	          'p',
 	          null,
 	          details.type
 	        ),
-	        _react2.default.createElement(
-	          "button",
-	          { onClick: function onClick() {
-	              return _this2.loadCloset();
-	            } },
-	          "Add to Suitcase"
-	        )
+	        this.renderButton()
 	      );
 	    }
 	  }]);
@@ -26919,77 +26884,173 @@
 	'use strict';
 	
 	// This is just some sample data so you don't have to think of your own!
-	module.exports = {
-	  article1: {
-	    name: 'Navy Tee',
-	    image: 'http://images.yoins.com/thumb/large/oaupload/yoins/images/C6/3A/08ff94c5-dfef-4d1c-9774-eff21c1403cb.jpg',
-	    type: 'top',
-	    category: 'apparel'
-	  },
+	module.exports = [{
+	  name: 'Navy Tee',
+	  image: 'http://images.yoins.com/thumb/large/oaupload/yoins/images/C6/3A/08ff94c5-dfef-4d1c-9774-eff21c1403cb.jpg',
+	  type: 'top',
+	  category: 'apparel'
+	}, {
+	  name: 'Cream Tank',
+	  image: 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=75704122',
+	  type: 'top',
+	  category: 'apparel'
+	}, {
+	  name: 'Chambray Button Down',
+	  image: 'https://s-media-cache-ak0.pinimg.com/736x/b5/85/1d/b5851d94407d2ada51ed4877d966fa9b.jpg',
+	  type: 'top',
+	  category: 'apparel'
+	}, {
+	  name: 'Aqua Sweater',
+	  image: 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=52368487',
+	  type: 'top',
+	  category: 'apparel'
+	}, {
+	  name: 'White and Salmon Polo',
+	  image: 'https://s-media-cache-ak0.pinimg.com/736x/35/77/2b/35772b5bff03a837e4a2e996c345a97e.jpg',
+	  type: 'top',
+	  category: 'apparel'
+	}, {
+	  name: 'Blue and White Stripe Dress',
+	  image: 'http://productshots1.modcloth.net/productshots/0115/7537/b2caae53c3727c01a91d2589d470a7fb.jpg?1340315167',
+	  type: 'dress',
+	  category: 'apparel'
+	}, {
+	  name: 'Dark Blue Jeans',
+	  image: 'http://simonoliverclothing.com/upload/iblock/0c6/1102_devonshire_dark_blue_l_z.jpg',
+	  type: 'bottom',
+	  category: 'apparel'
+	}, {
+	  name: 'White and Navy Skirt',
+	  image: 'https://dtpmhvbsmffsz.cloudfront.net/posts/2014/09/04/5408e443ba53401a6c42300d/m_5408e44ee381dc06c74335f2.jpg',
+	  type: 'bottom',
+	  category: 'apparel'
+	}, {
+	  name: 'Nantucket Red Shorts',
+	  image: 'http://cdn.shopify.com/s/files/1/0063/1132/products/Nantucket_Red_Collection_Ladies_5_Shorts_large.jpg?v=1443521950',
+	  type: 'bottom',
+	  category: 'apparel'
+	}, {
+	  name: 'Longchamp Tote',
+	  image: 'http://g.nordstromimage.com/ImageGallery/store/product/Zoom/11/_5810891.jpg',
+	  type: 'purse',
+	  category: 'accessory'
+	}];
+
+/***/ },
+/* 234 */
+/*!********************************!*\
+  !*** ./src/client/app/App.jsx ***!
+  \********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 	
-	  article2: {
-	    name: 'Cream Tank',
-	    image: 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=75704122',
-	    type: 'top',
-	    category: 'apparel'
-	  },
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
-	  article3: {
-	    name: 'Chambray Button Down',
-	    image: 'https://s-media-cache-ak0.pinimg.com/736x/b5/85/1d/b5851d94407d2ada51ed4877d966fa9b.jpg',
-	    type: 'top',
-	    category: 'apparel'
-	  },
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	  article4: {
-	    name: 'Aqua Sweater',
-	    image: 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=52368487',
-	    type: 'top',
-	    category: 'apparel'
-	  },
+	var _react = __webpack_require__(/*! react */ 1);
 	
-	  article5: {
-	    name: 'White and Salmon Polo',
-	    image: 'https://s-media-cache-ak0.pinimg.com/736x/35/77/2b/35772b5bff03a837e4a2e996c345a97e.jpg',
-	    type: 'top',
-	    category: 'apparel'
-	  },
+	var _react2 = _interopRequireDefault(_react);
 	
-	  article6: {
-	    name: 'Blue and White Stripe Dress',
-	    image: 'http://productshots1.modcloth.net/productshots/0115/7537/b2caae53c3727c01a91d2589d470a7fb.jpg?1340315167',
-	    type: 'dress',
-	    category: 'apparel'
-	  },
+	var _Suitcase = __webpack_require__(/*! ./Suitcase.jsx */ 230);
 	
-	  article7: {
-	    name: 'Dark Blue Jeans',
-	    image: 'http://simonoliverclothing.com/upload/iblock/0c6/1102_devonshire_dark_blue_l_z.jpg',
-	    type: 'bottom',
-	    category: 'apparel'
-	  },
+	var _Suitcase2 = _interopRequireDefault(_Suitcase);
 	
-	  article8: {
-	    name: 'White and Navy Skirt',
-	    image: 'https://dtpmhvbsmffsz.cloudfront.net/posts/2014/09/04/5408e443ba53401a6c42300d/m_5408e44ee381dc06c74335f2.jpg',
-	    type: 'pbottom',
-	    category: 'apparel'
-	  },
+	var _Closet = __webpack_require__(/*! ./Closet.jsx */ 231);
 	
-	  article9: {
-	    name: 'Nantucket Red Shorts',
-	    image: 'http://cdn.shopify.com/s/files/1/0063/1132/products/Nantucket_Red_Collection_Ladies_5_Shorts_large.jpg?v=1443521950',
-	    type: 'bottom',
-	    category: 'apparel'
-	  },
+	var _Closet2 = _interopRequireDefault(_Closet);
 	
-	  article10: {
-	    name: 'Longchamp Tote',
-	    image: 'http://g.nordstromimage.com/ImageGallery/store/product/Zoom/11/_5810891.jpg',
-	    type: 'purse',
-	    category: 'accessory'
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var App = function (_React$Component) {
+	  _inherits(App, _React$Component);
+	
+	  function App() {
+	    _classCallCheck(this, App);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
+	
+	    _this.state = {
+	      closet: [],
+	      suitcase: []
+	    };
+	    return _this;
 	  }
-	};
+	
+	  _createClass(App, [{
+	    key: 'loadCloset',
+	    value: function loadCloset() {
+	      this.setState({
+	        closet: __webpack_require__(/*! ./sample-closet.jsx */ 233)
+	      });
+	    }
+	  }, {
+	    key: 'addToSuitcase',
+	    value: function addToSuitcase(item) {
+	      this.state.suitcase.push(item);
+	      this.setState({
+	        suitcase: this.state.suitcase
+	      });
+	    }
+	  }, {
+	    key: 'removeFromSuitcase',
+	    value: function removeFromSuitcase(item) {
+	      var index = this.state.suitcase.indexOf(item);
+	      if (index > -1) {
+	        this.state.suitcase.splice(index, 1);
+	      };
+	      this.setState({
+	        suitcase: this.state.suitcase
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'My Suitcase'
+	        ),
+	        _react2.default.createElement(_Suitcase2.default, { items: this.state.suitcase, removeFromSuitcase: this.removeFromSuitcase.bind(this) }),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'My Closet'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: function onClick() {
+	                return _this2.loadCloset();
+	              } },
+	            'Load Closet'
+	          )
+	        ),
+	        _react2.default.createElement(_Closet2.default, { items: this.state.closet, addToSuitcase: this.addToSuitcase.bind(this) })
+	      );
+	    }
+	  }]);
+	
+	  return App;
+	}(_react2.default.Component);
+	
+	exports.default = App;
 
 /***/ }
 /******/ ]);
