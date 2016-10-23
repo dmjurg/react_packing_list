@@ -26679,12 +26679,15 @@
 	  function Suitcase() {
 	    _classCallCheck(this, Suitcase);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Suitcase).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Suitcase).call(this));
+	
+	    _this.renderItem = _this._renderItem.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Suitcase, [{
-	    key: 'renderItem',
-	    value: function renderItem(item, i) {
+	    key: '_renderItem',
+	    value: function _renderItem(item, i) {
 	      return _react2.default.createElement(_Item2.default, { key: 'item' + i, details: item, showButton: false, removeFromSuitcase: this.props.removeFromSuitcase });
 	    }
 	  }, {
@@ -26701,7 +26704,7 @@
 	        _react2.default.createElement(
 	          'ul',
 	          null,
-	          this.props.items.map(this.renderItem.bind(this))
+	          this.props.items.map(this.renderItem)
 	        )
 	      );
 	    }
@@ -26751,12 +26754,15 @@
 	  function Closet() {
 	    _classCallCheck(this, Closet);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Closet).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Closet).call(this));
+	
+	    _this.renderItem = _this._renderItem.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Closet, [{
-	    key: 'renderItem',
-	    value: function renderItem(item, i) {
+	    key: '_renderItem',
+	    value: function _renderItem(item, i) {
 	      return _react2.default.createElement(_Item2.default, { key: 'item' + i, details: item, showButton: true, addToSuitcase: this.props.addToSuitcase });
 	    }
 	  }, {
@@ -26769,7 +26775,7 @@
 	        _react2.default.createElement(
 	          'ul',
 	          null,
-	          this.props.items.map(this.renderItem.bind(this))
+	          this.props.items.map(this.renderItem)
 	        )
 	      );
 	    }
@@ -26983,27 +26989,30 @@
 	      closet: [],
 	      suitcase: []
 	    };
+	    _this.addToSuitcase = _this._addToSuitcase.bind(_this);
+	    _this.removeFromSuitcase = _this._removeFromSuitcase.bind(_this);
+	    _this.loadCloset = _this._loadCloset.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(App, [{
-	    key: 'loadCloset',
-	    value: function loadCloset() {
+	    key: '_loadCloset',
+	    value: function _loadCloset() {
 	      this.setState({
 	        closet: __webpack_require__(/*! ./sample-closet.jsx */ 233)
 	      });
 	    }
 	  }, {
-	    key: 'addToSuitcase',
-	    value: function addToSuitcase(item) {
+	    key: '_addToSuitcase',
+	    value: function _addToSuitcase(item) {
 	      this.state.suitcase.push(item);
 	      this.setState({
 	        suitcase: this.state.suitcase
 	      });
 	    }
 	  }, {
-	    key: 'removeFromSuitcase',
-	    value: function removeFromSuitcase(item) {
+	    key: '_removeFromSuitcase',
+	    value: function _removeFromSuitcase(item) {
 	      var index = this.state.suitcase.indexOf(item);
 	      if (index > -1) {
 	        this.state.suitcase.splice(index, 1);
@@ -27015,8 +27024,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -27025,7 +27032,7 @@
 	          null,
 	          'My Suitcase'
 	        ),
-	        _react2.default.createElement(_Suitcase2.default, { items: this.state.suitcase, removeFromSuitcase: this.removeFromSuitcase.bind(this) }),
+	        _react2.default.createElement(_Suitcase2.default, { items: this.state.suitcase, removeFromSuitcase: this.removeFromSuitcase }),
 	        _react2.default.createElement(
 	          'h2',
 	          null,
@@ -27036,13 +27043,11 @@
 	          null,
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: function onClick() {
-	                return _this2.loadCloset();
-	              } },
+	            { onClick: this.loadCloset },
 	            'Load Closet'
 	          )
 	        ),
-	        _react2.default.createElement(_Closet2.default, { items: this.state.closet, addToSuitcase: this.addToSuitcase.bind(this) })
+	        _react2.default.createElement(_Closet2.default, { items: this.state.closet, addToSuitcase: this.addToSuitcase })
 	      );
 	    }
 	  }]);

@@ -3,7 +3,12 @@ import Item from './Item.jsx';
 
 class Suitcase extends React.Component {
 
-  renderItem (item, i) {
+  constructor () {
+    super();
+    this.renderItem = this._renderItem.bind(this);
+  }
+
+  _renderItem (item, i) {
     return (
       <Item key={`item${i}`} details={item} showButton={false} removeFromSuitcase={this.props.removeFromSuitcase} />
     )
@@ -14,7 +19,7 @@ class Suitcase extends React.Component {
       <div>
         <p>Suitcase</p>
         <ul>
-          {this.props.items.map(this.renderItem.bind(this))}
+          {this.props.items.map(this.renderItem)}
         </ul>
       </div>
     )

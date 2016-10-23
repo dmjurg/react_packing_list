@@ -3,7 +3,12 @@ import Item from './Item.jsx';;
 
 class Closet extends React.Component {
 
-  renderItem (item, i) {
+  constructor () {
+    super();
+    this.renderItem = this._renderItem.bind(this);
+  }
+
+  _renderItem (item, i) {
     return (
       <Item key={`item${i}`} details={item} showButton={true} addToSuitcase={this.props.addToSuitcase} />
     )
@@ -14,7 +19,7 @@ class Closet extends React.Component {
       <div>
         closet
         <ul>
-          {this.props.items.map(this.renderItem.bind(this))}
+          {this.props.items.map(this.renderItem)}
         </ul>
       </div>
     )
